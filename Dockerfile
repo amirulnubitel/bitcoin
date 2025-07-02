@@ -48,7 +48,8 @@ COPY . .
 RUN cd depends && make -j$(nproc) NO_QT=1
 
 # Configure and build VertoCoin
-RUN cmake -B build \
+RUN mkdir -p build && cd build && \
+   cmake .. \
    -DCMAKE_TOOLCHAIN_FILE=/app/depends/x86_64-pc-linux-gnu/toolchain.cmake \
    -DCMAKE_BUILD_TYPE=Release \
    -DBUILD_TX=ON \
@@ -63,6 +64,7 @@ RUN cmake -B build \
    -DENABLE_TESTS=OFF \
    -DENABLE_BENCH=ON
 
+# RUN cmake -B build \
 # -DWITH_SQLITE=ON \
 # -DWITH_BDB=ON \
 # -DWITH_MINIUPNPC=ON \
@@ -70,7 +72,9 @@ RUN cmake -B build \
 # -DWITH_QRENCODE=ON \
 
 # Build the project
-RUN cmake --build build -j$(nproc)
+RUN cd build && \
+   make -j$THREADS
+# RUN cmake --build build -j$(nproc)
 
 # Runtime stage
 FROM ubuntu:22.04
