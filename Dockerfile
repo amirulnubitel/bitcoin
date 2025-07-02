@@ -45,10 +45,8 @@ WORKDIR /app
 COPY . .
 
 # Build dependencies first (if using depends system)
-RUN cd depends && make -j$(nproc) NO_QT=1
-
-# Configure and build VertoCoin
-RUN cmake -B build \
+RUN mkdir -p app && cd app && \
+   cmake -B app \
    -DCMAKE_BUILD_TYPE=Release \
    -DBUILD_TX=ON \
    -DBUILD_UTIL=ON \
@@ -69,7 +67,7 @@ RUN cmake -B build \
 # -DWITH_QRENCODE=ON \
 
 # Build the project
-RUN cmake --build build -j$(nproc)
+RUN cmake --build app -j$(nproc)
 
 # Runtime stage
 FROM ubuntu:22.04
