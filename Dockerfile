@@ -23,6 +23,7 @@ RUN apt-get update && apt-get install -y \
    xz-utils \
    git \
    ca-certificates \
+   libsqlite3-dev \
    && rm -rf /var/lib/apt/lists/*
 
 # Set working directory
