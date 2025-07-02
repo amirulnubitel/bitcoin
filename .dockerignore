@@ -10,8 +10,7 @@ build/
 .git/
 .gitignore
 
-# Documentation (not needed for runtime)
-doc/
+# Documentation (runtime docs excluded, but CMake needs doc/ directory)
 *.md
 COPYING
 SECURITY.md
@@ -26,8 +25,7 @@ contrib/devtools/
 contrib/guix/
 contrib/verify-*/
 
-# Test files
-test/
+# Test files (keep test/ directory but exclude specific test subdirectories)
 src/test/
 ci/test/
 

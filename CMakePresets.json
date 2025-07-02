@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "cmakeMinimumRequired": {"major": 3, "minor": 21, "patch": 0},
+  "cmakeMinimumRequired": { "major": 3, "minor": 21, "patch": 0 },
   "configurePresets": [
     {
       "name": "vs2022",
@@ -68,10 +68,10 @@
         "BUILD_DAEMON": "ON",
         "BUILD_FUZZ_BINARY": "ON",
         "BUILD_GUI": "ON",
-        "BUILD_GUI_TESTS": "ON",
+        "BUILD_GUI_TESTS": "OFF",
         "BUILD_KERNEL_LIB": "ON",
         "BUILD_SHARED_LIBS": "ON",
-        "BUILD_TESTS": "ON",
+        "BUILD_TESTS": "OFF",
         "BUILD_TX": "ON",
         "BUILD_UTIL": "ON",
         "BUILD_UTIL_CHAINSTATE": "ON",
@@ -80,7 +80,7 @@
         "ENABLE_WALLET": "ON",
         "ENABLE_IPC": "ON",
         "WITH_QRENCODE": "ON",
-        "WITH_USDT": "ON",
+        "WITH_USDT": "OFF",
         "WITH_ZMQ": "ON"
       }
     }
