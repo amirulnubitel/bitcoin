@@ -24,6 +24,17 @@ RUN apt-get update && apt-get install -y \
    git \
    ca-certificates \
    libsqlite3-dev \
+   libboost-all-dev \
+   libevent-dev \
+   libminiupnpc-dev \
+   libnatpmp-dev \
+   libzmq3-dev \
+   qtbase5-dev \
+   qttools5-dev-tools \
+   libqrencode-dev \
+   libdb5.3++-dev \
+   libssl-dev \
+   pkg-config \
    && rm -rf /var/lib/apt/lists/*
 
 # Set working directory
