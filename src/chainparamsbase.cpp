@@ -44,13 +44,13 @@ std::unique_ptr<CBaseChainParams> CreateBaseChainParams(const ChainType chain)
     case ChainType::MAIN:
         return std::make_unique<CBaseChainParams>("", 9332); // Vertocoin RPC port
     case ChainType::TESTNET:
-        return std::make_unique<CBaseChainParams>("testnet3", 19332);
+        return std::make_unique<CBaseChainParams>("testnet3", 19332); // Vertocoin testnet RPC port
     case ChainType::TESTNET4:
-        return std::make_unique<CBaseChainParams>("testnet4", 49332);
+        return std::make_unique<CBaseChainParams>("testnet4", 49332); // Vertocoin testnet4 RPC port
     case ChainType::SIGNET:
-        return std::make_unique<CBaseChainParams>("signet", 39332);
+        return std::make_unique<CBaseChainParams>("signet", 39332); // Vertocoin signet RPC port
     case ChainType::REGTEST:
-        return std::make_unique<CBaseChainParams>("regtest", 18443);
+        return std::make_unique<CBaseChainParams>("regtest", 19443); // Vertocoin regtest RPC port
     }
     assert(false);
 }

@@ -105,7 +105,7 @@ public:
         consensus.SegwitHeight = 0;
         consensus.MinBIP9WarningHeight = 0;
 
-        consensus.powLimit = uint256{"00000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff"};
+        consensus.powLimit = uint256{"7fffff0000000000000000000000000000000000000000000000000000000000"};
         consensus.nPowTargetTimespan = 30 * 60; // 30 minutes (60 blocks * 30 seconds)
         consensus.nPowTargetSpacing = 30;       // 30 seconds
         consensus.fPowAllowMinDifficultyBlocks = false;
@@ -145,18 +145,16 @@ public:
         m_assumed_blockchain_size = 10; // Much smaller initial blockchain
         m_assumed_chain_state_size = 1;
 
-        // Vertocoin genesis block - July 1st, 2025
+        // Vertocoin genesis block - July 1st, 2024
         // Genesis reward includes initial coin distribution: 2,000,000,000 VTO
-        genesis = CreateGenesisBlock(1719792000, 2083236893, 0x207fffff, 1, 2000000000LL * COIN);
+        genesis = CreateGenesisBlock(1719792000, 2, 0x207fffff, 1, 2000000000LL * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        // Note: Will be computed when genesis is mined
-        // assert(consensus.hashGenesisBlock == uint256{"TBD"});
-        // assert(genesis.hashMerkleRoot == uint256{"TBD"});
+
+        // assert(consensus.hashGenesisBlock == uint256{"000092d308e918a0036a633b2c931ad9112b0c83f341b0cbc3fecbcddbbd503e"});
+        // assert(genesis.hashMerkleRoot == uint256{"e9cdd17d0935491ae1bfa045800e17381f987f96991d40febf7b5cb7e293fba2"});
 
         // Vertocoin seed nodes
-        vSeeds.emplace_back("seed1.vertomax.com.");
-        vSeeds.emplace_back("seed2.vertomax.com.");
-        vSeeds.emplace_back("seed3.vertomax.com.");
+        vSeeds.emplace_back("explorer.vertomax.com.");
 
         // Vertocoin address prefixes - using V for VTO addresses
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 71); // V
@@ -185,7 +183,7 @@ public:
 };
 
 /**
- * Testnet (v3): public test network which is reset from time to time.
+ * Testnet (v3): public test network for Vertocoin which is reset from time to time.
  */
 class CTestNetParams : public CChainParams
 {
@@ -195,95 +193,94 @@ public:
         m_chain_type = ChainType::TESTNET;
         consensus.signet_blocks = false;
         consensus.signet_challenge.clear();
-        consensus.nSubsidyHalvingInterval = 210000;
-        consensus.script_flag_exceptions.emplace( // BIP16 exception
-            uint256{"00000000dd30457c001f4095d208cc1296b0eed002427aa599874af7a432b105"}, SCRIPT_VERIFY_NONE);
-        consensus.BIP34Height = 21111;
-        consensus.BIP34Hash = uint256{"0000000023b3a96d3484e5abb3755c413e7d41500f8e2a5c3f0dd01299cd8ef8"};
-        consensus.BIP65Height = 581885;          // 00000000007f6655f22f98e72ed80d8b06dc761d5da09df0fa1dc4be4f861eb6
-        consensus.BIP66Height = 330776;          // 000000002104c8c45e99a8853285a3b592602a3ccde2b832481da85e9e4ba182
-        consensus.CSVHeight = 770112;            // 00000000025e930139bac5c6c31a403776da130831ab85be56578f3fa75369bb
-        consensus.SegwitHeight = 834624;         // 00000000002b980fcd729daaa248fd9316a5200e9b367f4ff2c42453e84201ca
-        consensus.MinBIP9WarningHeight = 836640; // segwit activation height + miner confirmation window
+
+        // Vertocoin testnet parameters
+        consensus.nSubsidyHalvingInterval = 4204800; // Same as mainnet for consistency
+        consensus.script_flag_exceptions.clear();    // No exceptions for new network
+
+        // Enable features from the start for new network
+        consensus.BIP34Height = 0;
+        consensus.BIP34Hash = uint256{};
+        consensus.BIP65Height = 0;
+        consensus.BIP66Height = 0;
+        consensus.CSVHeight = 0;
+        consensus.SegwitHeight = 0;
+        consensus.MinBIP9WarningHeight = 0;
+
         consensus.powLimit = uint256{"00000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff"};
-        consensus.nPowTargetTimespan = 14 * 24 * 60 * 60; // two weeks
-        consensus.nPowTargetSpacing = 10 * 60;
-        consensus.fPowAllowMinDifficultyBlocks = true;
+        consensus.nPowTargetTimespan = 30 * 60;        // 30 minutes (60 blocks * 30 seconds)
+        consensus.nPowTargetSpacing = 30;              // 30 seconds
+        consensus.fPowAllowMinDifficultyBlocks = true; // Allow for testing
         consensus.enforce_BIP94 = false;
         consensus.fPowNoRetargeting = false;
+
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = Consensus::BIP9Deployment::NEVER_ACTIVE;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
-        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].min_activation_height = 0; // No activation delay
-        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].threshold = 1512;          // 75%
+        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].min_activation_height = 0;
+        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].threshold = 1512; // 75%
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].period = 2016;
 
-        // Deployment of Taproot (BIPs 340-342)
+        // Deployment of Taproot (BIPs 340-342) - active from start
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].bit = 2;
-        consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nStartTime = 1619222400;   // April 24th, 2021
-        consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nTimeout = 1628640000;     // August 11th, 2021
-        consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].min_activation_height = 0; // No activation delay
-        consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].threshold = 1512;          // 75%
+        consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nStartTime = 1719792000; // July 1st, 2025
+        consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
+        consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].min_activation_height = 0;
+        consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].threshold = 1512; // 75%
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].period = 2016;
 
-        consensus.nMinimumChainWork = uint256{"0000000000000000000000000000000000000000000015f5e0c9f13455b0eb17"};
-        consensus.defaultAssumeValid = uint256{"00000000000003fc7967410ba2d0a8a8d50daedc318d43e8baf1a9782c236a57"}; // 3974606
+        consensus.nMinimumChainWork = uint256{"0000000000000000000000000000000000000000000000000000000000000000"};
+        consensus.defaultAssumeValid = uint256{};
 
-        pchMessageStart[0] = 0x0b;
-        pchMessageStart[1] = 0x11;
-        pchMessageStart[2] = 0x09;
-        pchMessageStart[3] = 0x07;
-        nDefaultPort = 18333;
+        // Vertocoin testnet magic bytes
+        pchMessageStart[0] = 0xf0;
+        pchMessageStart[1] = 0xd9;
+        pchMessageStart[2] = 0xb7;
+        pchMessageStart[3] = 0xd3; // Different from mainnet
+        nDefaultPort = 19333;      // Testnet port
         nPruneAfterHeight = 1000;
-        m_assumed_blockchain_size = 200;
-        m_assumed_chain_state_size = 19;
+        m_assumed_blockchain_size = 10;
+        m_assumed_chain_state_size = 1;
 
-        genesis = CreateGenesisBlock(1296688602, 414098458, 0x1d00ffff, 1, 50 * COIN);
+        // Vertocoin testnet genesis - same timestamp as mainnet but different nonce
+        genesis = CreateGenesisBlock(1719792000, 2083236894, 0x207fffff, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        // assert(consensus.hashGenesisBlock == uint256{"000000000933ea01ad0ee984209779baaec3ced90fa3f408719526f8d77f4943"});
-        // assert(genesis.hashMerkleRoot == uint256{"4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b"});
+        // Note: Will be computed when genesis is mined
+        // assert(consensus.hashGenesisBlock == uint256{"TBD"});
+        // assert(genesis.hashMerkleRoot == uint256{"TBD"});
 
         vFixedSeeds.clear();
         vSeeds.clear();
-        // nodes with support for servicebits filtering should be at the top
-        vSeeds.emplace_back("testnet-seed.bitcoin.jonasschnelli.ch.");
-        vSeeds.emplace_back("seed.tbtc.petertodd.net.");
-        vSeeds.emplace_back("seed.testnet.bitcoin.sprovoost.nl.");
-        vSeeds.emplace_back("testnet-seed.bluematt.me.");    // Just a static list of stable node(s), only supports x9
-        vSeeds.emplace_back("seed.testnet.achownodes.xyz."); // Ava Chow, only supports x1, x5, x9, x49, x809, x849, xd, x400, x404, x408, x448, xc08, xc48, x40c
+        // Vertocoin testnet seed nodes
+        vSeeds.emplace_back("explorer.vertomax.com.");
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 111);
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 196);
-        base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 239);
-        base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x35, 0x87, 0xCF};
-        base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x35, 0x83, 0x94};
+        // Vertocoin testnet address prefixes - using different prefixes
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 111); // Standard testnet
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 196); // Standard testnet
+        base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 239);     // Standard testnet
+        base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x35, 0x87, 0xCF};           // Standard testnet
+        base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x35, 0x83, 0x94};           // Standard testnet
 
-        bech32_hrp = "tb";
+        bech32_hrp = "tvto"; // Vertocoin testnet bech32 prefix
 
         vFixedSeeds = std::vector<uint8_t>(std::begin(chainparams_seed_test), std::end(chainparams_seed_test));
 
         fDefaultConsistencyChecks = false;
         m_is_mockable_chain = false;
 
-        m_assumeutxo_data = {
-            {
-                .height = 2'500'000,
-                .hash_serialized = AssumeutxoHash{uint256{"f841584909f68e47897952345234e37fcd9128cd818f41ee6c3ca68db8071be7"}},
-                .m_chain_tx_count = 66484552,
-                .blockhash = consteval_ctor(uint256{"0000000000000093bcb68c03a9a168ae252572d348a2eaeba2cdf9231d73206f"}),
-            }};
+        m_assumeutxo_data = {};
 
         chainTxData = ChainTxData{
-            // Data from RPC: getchaintxstats 4096 00000000000003fc7967410ba2d0a8a8d50daedc318d43e8baf1a9782c236a57
-            .nTime = 1741042082,
-            .tx_count = 475477615,
-            .dTxRate = 17.15933950357594,
+            // Initial data for new Vertocoin testnet
+            .nTime = 1719792000, // July 1st, 2025
+            .tx_count = 1,       // Only genesis transaction
+            .dTxRate = 0.0,      // No transaction rate yet
         };
     }
 };
 
 /**
- * Testnet (v4): public test network which is reset from time to time.
+ * Testnet (v4): public test network for Vertocoin which is reset from time to time.
  */
 class CTestNet4Params : public CChainParams
 {
@@ -293,94 +290,101 @@ public:
         m_chain_type = ChainType::TESTNET4;
         consensus.signet_blocks = false;
         consensus.signet_challenge.clear();
-        consensus.nSubsidyHalvingInterval = 210000;
-        consensus.BIP34Height = 1;
+
+        // Vertocoin testnet4 parameters
+        consensus.nSubsidyHalvingInterval = 4204800; // Same as mainnet for consistency
+
+        // Enable features from the start for new network
+        consensus.BIP34Height = 0;
         consensus.BIP34Hash = uint256{};
-        consensus.BIP65Height = 1;
-        consensus.BIP66Height = 1;
-        consensus.CSVHeight = 1;
-        consensus.SegwitHeight = 1;
+        consensus.BIP65Height = 0;
+        consensus.BIP66Height = 0;
+        consensus.CSVHeight = 0;
+        consensus.SegwitHeight = 0;
         consensus.MinBIP9WarningHeight = 0;
+
         consensus.powLimit = uint256{"00000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff"};
-        consensus.nPowTargetTimespan = 14 * 24 * 60 * 60; // two weeks
-        consensus.nPowTargetSpacing = 10 * 60;
-        consensus.fPowAllowMinDifficultyBlocks = true;
-        consensus.enforce_BIP94 = true;
+        consensus.nPowTargetTimespan = 30 * 60;        // 30 minutes (60 blocks * 30 seconds)
+        consensus.nPowTargetSpacing = 30;              // 30 seconds
+        consensus.fPowAllowMinDifficultyBlocks = true; // Allow for testing
+        consensus.enforce_BIP94 = false;
         consensus.fPowNoRetargeting = false;
 
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = Consensus::BIP9Deployment::NEVER_ACTIVE;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
-        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].min_activation_height = 0; // No activation delay
-        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].threshold = 1512;          // 75%
+        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].min_activation_height = 0;
+        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].threshold = 1512; // 75%
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].period = 2016;
 
-        // Deployment of Taproot (BIPs 340-342)
+        // Deployment of Taproot (BIPs 340-342) - active from start
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].bit = 2;
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nStartTime = Consensus::BIP9Deployment::ALWAYS_ACTIVE;
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
-        consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].min_activation_height = 0; // No activation delay
-        consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].threshold = 1512;          // 75%
+        consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].min_activation_height = 0;
+        consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].threshold = 1512; // 75%
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].period = 2016;
 
-        consensus.nMinimumChainWork = uint256{"0000000000000000000000000000000000000000000001d6dce8651b6094e4c1"};
-        consensus.defaultAssumeValid = uint256{"0000000000003ed4f08dbdf6f7d6b271a6bcffce25675cb40aa9fa43179a89f3"}; // 72600
+        consensus.nMinimumChainWork = uint256{"0000000000000000000000000000000000000000000000000000000000000000"};
+        consensus.defaultAssumeValid = uint256{};
 
-        pchMessageStart[0] = 0x1c;
-        pchMessageStart[1] = 0x16;
-        pchMessageStart[2] = 0x3f;
-        pchMessageStart[3] = 0x28;
-        nDefaultPort = 48333;
+        // Vertocoin testnet4 magic bytes
+        pchMessageStart[0] = 0xf0;
+        pchMessageStart[1] = 0xd9;
+        pchMessageStart[2] = 0xb7;
+        pchMessageStart[3] = 0xd4; // Different from mainnet and testnet
+        nDefaultPort = 49333;      // Testnet4 port
         nPruneAfterHeight = 1000;
-        m_assumed_blockchain_size = 11;
+        m_assumed_blockchain_size = 10;
         m_assumed_chain_state_size = 1;
 
-        const char* testnet4_genesis_msg = "03/May/2024 000000000000000000001ebd58c244970b3aa9d783bb001011fbe8ea8e98e00e";
-        const CScript testnet4_genesis_script = CScript() << "000000000000000000000000000000000000000000000000000000000000000000"_hex << OP_CHECKSIG;
+        // Vertocoin testnet4 genesis
+        const char* testnet4_genesis_msg = "Vertocoin Testnet4 - Fast transactions for everyone [vertomax.com]";
+        const CScript testnet4_genesis_script = CScript() << "04678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5f"_hex << OP_CHECKSIG;
         genesis = CreateGenesisBlock(testnet4_genesis_msg,
                                      testnet4_genesis_script,
-                                     1714777860,
-                                     393743547,
-                                     0x1d00ffff,
+                                     1719792000,
+                                     2083236895,
+                                     0x207fffff,
                                      1,
                                      50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        // assert(consensus.hashGenesisBlock == uint256{"00000000da84f2bafbbc53dee25a72ae507ff4914b867c565be350b0da8bf043"});
-        // assert(genesis.hashMerkleRoot == uint256{"7aa0a7ae1e223414cb807e40cd57e667b718e42aaf9306db9102fe28912b7b4e"});
+        // Note: Will be computed when genesis is mined
+        // assert(consensus.hashGenesisBlock == uint256{"TBD"});
+        // assert(genesis.hashMerkleRoot == uint256{"TBD"});
 
         vFixedSeeds.clear();
         vSeeds.clear();
-        // nodes with support for servicebits filtering should be at the top
-        vSeeds.emplace_back("seed.testnet4.bitcoin.sprovoost.nl."); // Sjors Provoost
-        vSeeds.emplace_back("seed.testnet4.wiz.biz.");              // Jason Maurice
+        // Vertocoin testnet4 seed nodes
+        vSeeds.emplace_back("explorer.vertomax.com.");
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 111);
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 196);
-        base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 239);
-        base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x35, 0x87, 0xCF};
-        base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x35, 0x83, 0x94};
+        // Vertocoin testnet4 address prefixes - using different prefixes
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 111); // Standard testnet
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 196); // Standard testnet
+        base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 239);     // Standard testnet
+        base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x35, 0x87, 0xCF};           // Standard testnet
+        base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x35, 0x83, 0x94};           // Standard testnet
 
-        bech32_hrp = "tb";
+        bech32_hrp = "tvto"; // Vertocoin testnet bech32 prefix
 
         vFixedSeeds = std::vector<uint8_t>(std::begin(chainparams_seed_testnet4), std::end(chainparams_seed_testnet4));
 
         fDefaultConsistencyChecks = false;
         m_is_mockable_chain = false;
 
-        m_assumeutxo_data = {
-            {}};
+        m_assumeutxo_data = {};
 
         chainTxData = ChainTxData{
-            // Data from RPC: getchaintxstats 4096 0000000000003ed4f08dbdf6f7d6b271a6bcffce25675cb40aa9fa43179a89f3
-            .nTime = 1741070246,
-            .tx_count = 7653966,
-            .dTxRate = 1.239174414591965,
+            // Initial data for new Vertocoin testnet4
+            .nTime = 1719792000, // July 1st, 2025
+            .tx_count = 1,       // Only genesis transaction
+            .dTxRate = 0.0,      // No transaction rate yet
         };
     }
 };
 
 /**
- * Signet: test network with an additional consensus parameter (see BIP325).
+ * Signet: test network for Vertocoin with an additional consensus parameter (see BIP325).
  */
 class SigNetParams : public CChainParams
 {
@@ -394,18 +398,17 @@ public:
         if (!options.challenge) {
             bin = "512103ad5e0edad18cb1f0fc0d28a3d4f1f3e445640337489abb10404f2d1e086be430210359ef5021964fe22d6f8e05b2463c9540ce96883fe3b278760f048f5189f2e6c452ae"_hex_v_u8;
             vFixedSeeds = std::vector<uint8_t>(std::begin(chainparams_seed_signet), std::end(chainparams_seed_signet));
-            vSeeds.emplace_back("seed.signet.bitcoin.sprovoost.nl.");
-            vSeeds.emplace_back("seed.signet.achownodes.xyz."); // Ava Chow, only supports x1, x5, x9, x49, x809, x849, xd, x400, x404, x408, x448, xc08, xc48, x40c
+            vSeeds.emplace_back("explorer.vertomax.com.");
 
-            consensus.nMinimumChainWork = uint256{"000000000000000000000000000000000000000000000000000002b517f3d1a1"};
-            consensus.defaultAssumeValid = uint256{"000000895a110f46e59eb82bbc5bfb67fa314656009c295509c21b4999f5180a"}; // 237722
+            consensus.nMinimumChainWork = uint256{"0000000000000000000000000000000000000000000000000000000000000000"};
+            consensus.defaultAssumeValid = uint256{};
             m_assumed_blockchain_size = 9;
             m_assumed_chain_state_size = 1;
             chainTxData = ChainTxData{
-                // Data from RPC: getchaintxstats 4096 000000895a110f46e59eb82bbc5bfb67fa314656009c295509c21b4999f5180a
-                .nTime = 1741019645,
-                .tx_count = 16540736,
-                .dTxRate = 1.064918879911595,
+                // Initial data for new Vertocoin signet
+                .nTime = 1719792000, // July 1st, 2025
+                .tx_count = 1,       // Only genesis transaction
+                .dTxRate = 0.0,      // No transaction rate yet
             };
         } else {
             bin = *options.challenge;
@@ -418,7 +421,7 @@ public:
                 0,
                 0,
             };
-            LogPrintf("Signet with challenge %s\n", HexStr(bin));
+            LogPrintf("Vertocoin Signet with challenge %s\n", HexStr(bin));
         }
 
         if (options.seeds) {
@@ -428,25 +431,31 @@ public:
         m_chain_type = ChainType::SIGNET;
         consensus.signet_blocks = true;
         consensus.signet_challenge.assign(bin.begin(), bin.end());
-        consensus.nSubsidyHalvingInterval = 210000;
-        consensus.BIP34Height = 1;
+
+        // Vertocoin signet parameters
+        consensus.nSubsidyHalvingInterval = 4204800; // Same as mainnet for consistency
+
+        // Enable features from the start for new network
+        consensus.BIP34Height = 0;
         consensus.BIP34Hash = uint256{};
-        consensus.BIP65Height = 1;
-        consensus.BIP66Height = 1;
-        consensus.CSVHeight = 1;
-        consensus.SegwitHeight = 1;
-        consensus.nPowTargetTimespan = 14 * 24 * 60 * 60; // two weeks
-        consensus.nPowTargetSpacing = 10 * 60;
+        consensus.BIP65Height = 0;
+        consensus.BIP66Height = 0;
+        consensus.CSVHeight = 0;
+        consensus.SegwitHeight = 0;
+        consensus.MinBIP9WarningHeight = 0;
+
+        consensus.nPowTargetTimespan = 30 * 60; // 30 minutes (60 blocks * 30 seconds)
+        consensus.nPowTargetSpacing = 30;       // 30 seconds
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.enforce_BIP94 = false;
         consensus.fPowNoRetargeting = false;
-        consensus.MinBIP9WarningHeight = 0;
         consensus.powLimit = uint256{"00000377ae000000000000000000000000000000000000000000000000000000"};
+
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = Consensus::BIP9Deployment::NEVER_ACTIVE;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
-        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].min_activation_height = 0; // No activation delay
-        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].threshold = 1815;          // 90%
+        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].min_activation_height = 0;
+        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].threshold = 1815; // 90%
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].period = 2016;
 
         // Activation of Taproot (BIPs 340-342)
@@ -493,7 +502,7 @@ public:
 };
 
 /**
- * Regression test: intended for private networks only. Has minimal difficulty to ensure that
+ * Regression test for Vertocoin: intended for private networks only. Has minimal difficulty to ensure that
  * blocks can be found instantly.
  */
 class CRegTestParams : public CChainParams
@@ -504,17 +513,22 @@ public:
         m_chain_type = ChainType::REGTEST;
         consensus.signet_blocks = false;
         consensus.signet_challenge.clear();
+
+        // Vertocoin regtest parameters - faster halving for testing
         consensus.nSubsidyHalvingInterval = 150;
-        consensus.BIP34Height = 1; // Always active unless overridden
+
+        // Enable features from the start for new network
+        consensus.BIP34Height = 0; // Always active unless overridden
         consensus.BIP34Hash = uint256();
-        consensus.BIP65Height = 1;  // Always active unless overridden
-        consensus.BIP66Height = 1;  // Always active unless overridden
-        consensus.CSVHeight = 1;    // Always active unless overridden
+        consensus.BIP65Height = 0;  // Always active unless overridden
+        consensus.BIP66Height = 0;  // Always active unless overridden
+        consensus.CSVHeight = 0;    // Always active unless overridden
         consensus.SegwitHeight = 0; // Always active unless overridden
         consensus.MinBIP9WarningHeight = 0;
+
         consensus.powLimit = uint256{"7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"};
-        consensus.nPowTargetTimespan = 24 * 60 * 60; // one day
-        consensus.nPowTargetSpacing = 10 * 60;
+        consensus.nPowTargetTimespan = 30 * 60; // 30 minutes (for consistency with mainnet)
+        consensus.nPowTargetSpacing = 30;       // 30 seconds
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.enforce_BIP94 = opts.enforce_bip94;
         consensus.fPowNoRetargeting = true;
@@ -522,25 +536,26 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 0;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
-        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].min_activation_height = 0; // No activation delay
-        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].threshold = 108;           // 75%
-        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].period = 144;              // Faster than normal for regtest (144 instead of 2016)
+        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].min_activation_height = 0;
+        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].threshold = 108; // 75%
+        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].period = 144;    // Faster than normal for regtest (144 instead of 2016)
 
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].bit = 2;
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nStartTime = Consensus::BIP9Deployment::ALWAYS_ACTIVE;
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
-        consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].min_activation_height = 0; // No activation delay
-        consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].threshold = 108;           // 75%
+        consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].min_activation_height = 0;
+        consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].threshold = 108; // 75%
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].period = 144;
 
         consensus.nMinimumChainWork = uint256{};
         consensus.defaultAssumeValid = uint256{};
 
+        // Vertocoin regtest magic bytes
         pchMessageStart[0] = 0xfa;
         pchMessageStart[1] = 0xbf;
         pchMessageStart[2] = 0xb5;
-        pchMessageStart[3] = 0xda;
-        nDefaultPort = 18444;
+        pchMessageStart[3] = 0xdb; // Different from Bitcoin
+        nDefaultPort = 19444;      // Different port
         nPruneAfterHeight = opts.fastprune ? 100 : 1000;
         m_assumed_blockchain_size = 0;
         m_assumed_chain_state_size = 0;
@@ -571,10 +586,12 @@ public:
             consensus.vDeployments[deployment_pos].min_activation_height = version_bits_params.min_activation_height;
         }
 
+        // Temporary: Use Bitcoin's known working regtest genesis for testing
         genesis = CreateGenesisBlock(1296688602, 2, 0x207fffff, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        // assert(consensus.hashGenesisBlock == uint256{"0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206"});
-        // assert(genesis.hashMerkleRoot == uint256{"4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b"});
+        // Note: Will be computed when genesis is mined
+        // assert(consensus.hashGenesisBlock == uint256{"TBD"});
+        // assert(genesis.hashMerkleRoot == uint256{"TBD"});
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
         vSeeds.clear();
@@ -613,13 +630,14 @@ public:
             .dTxRate = 0.001, // Set a non-zero rate to make it testable
         };
 
+        // Vertocoin regtest address prefixes - using different prefixes
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 111);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 196);
         base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 239);
         base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x35, 0x87, 0xCF};
         base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x35, 0x83, 0x94};
 
-        bech32_hrp = "bcrt";
+        bech32_hrp = "rvto"; // Vertocoin regtest bech32 prefix
     }
 };
 
