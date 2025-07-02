@@ -48,8 +48,8 @@ COPY . .
 RUN cd depends && make -j$(nproc) NO_QT=1
 
 # Configure and build VertoCoin
-RUN cd app && \
-   cmake -B build \
+RUN cmake -B build \
+   -DCMAKE_TOOLCHAIN_FILE=/app/depends/x86_64-pc-linux-gnu/toolchain.cmake \
    -DCMAKE_BUILD_TYPE=Release \
    -DBUILD_TX=ON \
    -DBUILD_UTIL=ON \
@@ -63,7 +63,6 @@ RUN cd app && \
    -DENABLE_TESTS=OFF \
    -DENABLE_BENCH=ON
 
-# -DCMAKE_TOOLCHAIN_FILE=/app/depends/toolchain.cmake \
 # -DWITH_SQLITE=ON \
 # -DWITH_BDB=ON \
 # -DWITH_MINIUPNPC=ON \
