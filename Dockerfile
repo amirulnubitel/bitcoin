@@ -34,6 +34,8 @@ RUN apt-get update && apt-get install -y \
    libdb5.3++-dev \
    libssl-dev \
    pkg-config \
+   libcapnp-dev \
+   capnproto \
    && rm -rf /var/lib/apt/lists/*
 
 # Set working directory
