@@ -1,0 +1,131 @@
+version: "3.8"
+
+services:
+  # VertoCoin Core Node
+  vertocoin-core:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: vertocoin:latest
+    container_name: vertocoin-core
+    restart: always
+    ports:
+      # Main network ports
+      - "9332:9332" # RPC port
+      - "9333:9333" # P2P port
+      # ZMQ notification ports
+      - "28332:28332" # Raw block notifications
+      - "28333:28333" # Raw transaction notifications
+      - "28334:28334" # Block hash notifications
+      - "28335:28335" # Transaction hash notifications
+    volumes:
+      # Persistent blockchain data
+      - vertocoin-data:/home/vertocoin/.vertocoin
+      # Optional: Custom configuration
+      - ./vertocoin.conf:/home/vertocoin/.vertocoin/vertocoin.conf:ro
+    networks:
+      - vertocoin-network
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "bitcoin-cli",
+          "-conf=/home/vertocoin/.vertocoin/vertocoin.conf",
+          "getblockchaininfo",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # VertoCoin Core Node (Regtest for development)
+  # vertocoin-regtest:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   image: vertocoin:latest
+  #   container_name: vertocoin-regtest
+  #   restart: always
+  #   ports:
+  #     - "19443:19443" # Regtest RPC port
+  #     - "19444:19444" # Regtest P2P port
+  #   volumes:
+  #     - vertocoin-regtest-data:/home/vertocoin/.vertocoin
+  #   environment:
+  #     - VERTOCOIN_NETWORK=regtest
+  #   networks:
+  #     - vertocoin-network
+  #   command:
+  #     [
+  #       "vertocoind",
+  #       "-regtest",
+  #       "-conf=/home/vertocoin/.vertocoin/vertocoin.conf",
+  #     ]
+  #   profiles:
+  #     - regtest
+  #   healthcheck:
+  #     test:
+  #       [
+  #         "CMD",
+  #         "vertocoin-cli",
+  #         "-regtest",
+  #         "-conf=/home/vertocoin/.vertocoin/vertocoin.conf",
+  #         "getblockchaininfo",
+  #       ]
+  #     interval: 30s
+  #     timeout: 10s
+  #     retries: 3
+  #     start_period: 30s
+
+  # Optional: Block Explorer (if you want to add one later)
+  # vertocoin-explorer:
+  #   image: nginx:alpine
+  #   container_name: vertocoin-explorer
+  #   restart: always
+  #   ports:
+  #     - "8080:80"
+  #   volumes:
+  #     - ./explorer:/usr/share/nginx/html:ro
+  #   networks:
+  #     - vertocoin-network
+  #   profiles:
+  #     - explorer
+
+  # Optional: Prometheus monitoring
+  # prometheus:
+  #   image: prom/prometheus:latest
+  #   container_name: vertocoin-prometheus
+  #   restart: always
+  #   ports:
+  #     - "9090:9090"
+  #   volumes:
+  #     - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+  #     - prometheus-data:/prometheus
+  #   command:
+  #     - '--config.file=/etc/prometheus/prometheus.yml'
+  #     - '--storage.tsdb.path=/prometheus'
+  #     - '--web.console.libraries=/etc/prometheus/console_libraries'
+  #     - '--web.console.templates=/etc/prometheus/consoles'
+  #   networks:
+  #     - vertocoin-network
+  #   profiles:
+  #     - monitoring
+
+volumes:
+  # Persistent data volumes
+  vertocoin-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./data/mainnet
+
+  # prometheus-data:
+  #   driver: local
+
+networks:
+  vertocoin-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.50.0.0/16

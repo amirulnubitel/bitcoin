@@ -1,0 +1,97 @@
+# Docker ignore file for VertoCoin
+# Prevents unnecessary files from being sent to Docker build context
+
+# Build directories
+build_dev_mode/
+build/
+.build/
+
+# Git
+.git/
+.gitignore
+
+# Documentation (not needed for runtime)
+doc/
+*.md
+COPYING
+SECURITY.md
+CONTRIBUTING.md
+
+# CI/CD
+ci/
+.github/
+
+# Development tools
+contrib/devtools/
+contrib/guix/
+contrib/verify-*/
+
+# Test files
+test/
+src/test/
+ci/test/
+
+# Backup files
+*.bak
+*.orig
+*.tmp
+*~
+
+# IDE/Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Dependencies cache (will be built in container)
+depends/built/
+depends/work/
+depends/sources/
+
+# Data directories
+vertocoin_data/
+data/
+.vertocoin/
+
+# Logs
+*.log
+debug.log
+
+# Coverage
+*.gcda
+*.gcno
+coverage/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+compile_commands.json
+CTestTestfile.cmake
+
+# Make
+Makefile
+
+# Qt
+*.pro.user
+*.qm
+
+# Windows
+*.exe
+*.dll
+Thumbs.db
+
+# Temporary Docker files
+.dockerignore
+Dockerfile.tmp
