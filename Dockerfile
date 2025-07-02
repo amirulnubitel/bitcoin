@@ -11,9 +11,13 @@ ENV TZ=UTC
 # Install build dependencies
 RUN apt-get update && apt-get install -y \
    build-essential \
+   bsdmainutils \
    cmake \
+   ccache \
    python3 \
    curl \
+   automake \
+   autoconf \
    make \
    patch \
    bison \
@@ -21,6 +25,7 @@ RUN apt-get update && apt-get install -y \
    ninja-build \
    xz-utils \
    git \
+   libtool \
    ca-certificates \
    libsqlite3-dev \
    libboost-all-dev \
@@ -48,8 +53,7 @@ COPY . .
 RUN cd depends && make -j$(nproc) NO_QT=1
 
 # Configure and build VertoCoin
-RUN mkdir -p build && cd build && \
-   cmake .. \
+RUN cmake -B build \
    -DCMAKE_TOOLCHAIN_FILE=/app/depends/x86_64-pc-linux-gnu/toolchain.cmake \
    -DCMAKE_BUILD_TYPE=Release \
    -DBUILD_TX=ON \
@@ -72,9 +76,7 @@ RUN mkdir -p build && cd build && \
 # -DWITH_QRENCODE=ON \
 
 # Build the project
-RUN cd build && \
-   make -j$THREADS
-# RUN cmake --build build -j$(nproc)
+RUN cmake --build build -j$(nproc)
 
 # Runtime stage
 FROM ubuntu:22.04
