@@ -36,8 +36,8 @@ RUN cd depends && make -j$(nproc) NO_QT=1
 
 # Configure and build VertoCoin
 RUN cmake -B build \
-   -DCMAKE_TOOLCHAIN_FILE=/app/depends/x86_64-pc-linux-gnu/toolchain.cmake \
    -DCMAKE_BUILD_TYPE=Release \
+   -DBUILD_TESTS=OFF \
    -DWITH_GUI=OFF \
    -DWITH_WALLET=ON \
    -DENABLE_TESTS=OFF \
