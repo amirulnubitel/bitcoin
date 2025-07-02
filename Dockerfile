@@ -45,10 +45,11 @@ WORKDIR /app
 COPY . .
 
 # Build dependencies first (if using depends system)
-RUN cd app && make -j$(nproc) NO_QT=1
+RUN cd depends && make -j$(nproc) NO_QT=1
 
 # Configure and build VertoCoin
-RUN cmake -B build \
+RUN cd app && \
+   cmake -B build \
    -DCMAKE_BUILD_TYPE=Release \
    -DBUILD_TX=ON \
    -DBUILD_UTIL=ON \
@@ -62,6 +63,7 @@ RUN cmake -B build \
    -DENABLE_TESTS=OFF \
    -DENABLE_BENCH=ON
 
+# -DCMAKE_TOOLCHAIN_FILE=/app/depends/toolchain.cmake \
 # -DWITH_SQLITE=ON \
 # -DWITH_BDB=ON \
 # -DWITH_MINIUPNPC=ON \
