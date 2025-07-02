@@ -17,10 +17,10 @@ using util::Join;
 
 /**
  * Name of client reported in the 'version' message. Report the same name
- * for both bitcoind and bitcoin-qt, to make it harder for attackers to
+ * for both vertod and vertocoin-qt, to make it harder for attackers to
  * target servers or GUI users specifically.
  */
-const std::string UA_NAME("Satoshi");
+const std::string UA_NAME("Vertocoin");
 
 
 #include <bitcoin-build-info.h>
@@ -33,19 +33,19 @@ const std::string UA_NAME("Satoshi");
 //! git will put "#define GIT_COMMIT_ID ..." on the next line inside archives. $Format:%n#define GIT_COMMIT_ID "%H"$
 
 #ifdef BUILD_GIT_TAG
-    #define BUILD_DESC BUILD_GIT_TAG
-    #define BUILD_SUFFIX ""
+#define BUILD_DESC BUILD_GIT_TAG
+#define BUILD_SUFFIX ""
 #else
-    #define BUILD_DESC "v" CLIENT_VERSION_STRING
-    #if CLIENT_VERSION_IS_RELEASE
-        #define BUILD_SUFFIX ""
-    #elif defined(BUILD_GIT_COMMIT)
-        #define BUILD_SUFFIX "-" BUILD_GIT_COMMIT
-    #elif defined(GIT_COMMIT_ID)
-        #define BUILD_SUFFIX "-g" GIT_COMMIT_ID
-    #else
-        #define BUILD_SUFFIX "-unk"
-    #endif
+#define BUILD_DESC "v" CLIENT_VERSION_STRING
+#if CLIENT_VERSION_IS_RELEASE
+#define BUILD_SUFFIX ""
+#elif defined(BUILD_GIT_COMMIT)
+#define BUILD_SUFFIX "-" BUILD_GIT_COMMIT
+#elif defined(GIT_COMMIT_ID)
+#define BUILD_SUFFIX "-g" GIT_COMMIT_ID
+#else
+#define BUILD_SUFFIX "-unk"
+#endif
 #endif
 
 static std::string FormatVersion(int nVersion)
