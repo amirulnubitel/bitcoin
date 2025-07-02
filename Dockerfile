@@ -48,11 +48,23 @@ RUN cd depends && make -j$(nproc) NO_QT=1
 # Configure and build VertoCoin
 RUN cmake -B build \
    -DCMAKE_BUILD_TYPE=Release \
+   -DBUILD_TX=ON \
+   -DBUILD_UTIL=ON \
+   -DWITH_ZMQ=ON \
+   -DWITH_WALLET=ON \
+   -DBUILD_WALLET_TOOL=ON \
+   -DWITH_CCACHE=ON \
+   -DENABLE_IPC=ON \
    -DBUILD_TESTS=OFF \
    -DWITH_GUI=OFF \
-   -DWITH_WALLET=ON \
    -DENABLE_TESTS=OFF \
-   -DENABLE_BENCH=OFF
+   -DENABLE_BENCH=ON
+
+# -DWITH_SQLITE=ON \
+# -DWITH_BDB=ON \
+# -DWITH_MINIUPNPC=ON \
+# -DWITH_NATPMP=ON \
+# -DWITH_QRENCODE=ON \
 
 # Build the project
 RUN cmake --build build -j$(nproc)
