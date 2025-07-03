@@ -38,6 +38,27 @@ services:
       retries: 3
       start_period: 60s
 
+  explorer:
+    image: amirulmus/vertomax-explore:latest
+    container_name: vertocoin-explorer
+    restart: always
+    ports:
+      - "3002:3002"
+    environment:
+      - BTCEXP_HOST=0.0.0.0
+      - BTCEXP_PORT=3002
+      - BTCEXP_BITCOIND_HOST=vertocoin-node
+      - BTCEXP_BITCOIND_PORT=9332
+      - BTCEXP_BITCOIND_USER=vertomax
+      - BTCEXP_BITCOIND_PASS=Vertomax2025
+      - BTCEXP_COIN=VTO
+      # - BTCEXP_ADDRESS_API=electrumx
+      # - BTCEXP_ELECTRUMX_SERVERS=tcp://electrumx:50001
+    networks:
+      - vertocoin-network
+    depends_on:
+      - vertocoin-core
+
   # VertoCoin Core Node (Regtest for development)
   # vertocoin-regtest:
   #   build:

@@ -64,14 +64,14 @@ setup() {
 # Build Docker image
 build() {
     log "Building VertoCoin Docker image..."
-    docker compose build vertocoin-core
+    docker compose build
     log "Build complete!"
 }
 
 # Start services
 start() {
     log "Starting VertoCoin mainnet node..."
-    docker compose up -d vertocoin-core
+    docker compose up -d
     log "VertoCoin mainnet node started!"
 }
 
