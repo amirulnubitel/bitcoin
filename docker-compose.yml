@@ -22,7 +22,7 @@ services:
       # Persistent blockchain data
       - vertocoin-data:/home/vertocoin/.vertocoin
       # Optional: Custom configuration
-      - ./vertocoin.conf:/home/vertocoin/.vertocoin/vertocoin.conf:ro
+      # - vertocoin.conf:/home/vertocoin/.vertocoin/vertocoin.conf:ro
     networks:
       - vertocoin-network
     healthcheck:
