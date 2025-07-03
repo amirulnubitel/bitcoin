@@ -59,6 +59,7 @@ RUN cmake -B build \
    -DBUILD_TX=ON \
    -DBUILD_UTIL=ON \
    -DWITH_ZMQ=ON \
+   -WITH_USDT=OFF \
    -DWITH_WALLET=ON \
    -DBUILD_WALLET_TOOL=ON \
    -DWITH_CCACHE=ON \
