@@ -20,13 +20,11 @@ CONTRIBUTING.md
 ci/
 .github/
 
-# Development tools
-contrib/devtools/
+# Development tools (keep devtools for build, exclude others)
 contrib/guix/
 contrib/verify-*/
 
-# Test files (keep test/ directory but exclude specific test subdirectories)
-src/test/
+# Test files (keep test/ directory structure but exclude heavy test data)
 ci/test/
 
 # Backup files
