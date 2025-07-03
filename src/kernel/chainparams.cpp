@@ -147,11 +147,11 @@ public:
 
         // Vertocoin genesis block - July 1st, 2024
         // Genesis reward includes initial coin distribution: 2,000,000,000 VTO
-        genesis = CreateGenesisBlock(1719792000, 2, 0x207fffff, 1, 2000000000LL * COIN);
+        genesis = CreateGenesisBlock(1719792000, 0, 0x207fffff, 1, 2000000000LL * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
 
-        // assert(consensus.hashGenesisBlock == uint256{"000092d308e918a0036a633b2c931ad9112b0c83f341b0cbc3fecbcddbbd503e"});
-        // assert(genesis.hashMerkleRoot == uint256{"e9cdd17d0935491ae1bfa045800e17381f987f96991d40febf7b5cb7e293fba2"});
+        assert(consensus.hashGenesisBlock == uint256{"0xa2a00f1b0fab74d41f63451c0655481eb22ef37f7cde115c0f25cef6b447bd7b"});
+        assert(genesis.hashMerkleRoot == uint256{"0xe9cdd17d0935491ae1bfa045800e17381f987f96991d40febf7b5cb7e293fba2"});
 
         // Vertocoin seed nodes
         vSeeds.emplace_back("explorer.vertomax.com.");
