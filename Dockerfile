@@ -81,18 +81,6 @@ RUN cmake -B build \
 # Build the project
 RUN cmake --build build -j$(nproc)
 
-# List built binaries for debugging
-RUN find /app/build -name "bitcoin*" -type f -executable
-
-# Create a staging directory and copy all built binaries
-RUN mkdir -p /app/binaries && \
-   cp /app/build/src/bitcoind /app/binaries/ && \
-   cp /app/build/src/bitcoin-cli /app/binaries/ && \
-   (cp /app/build/src/bitcoin-tx /app/binaries/ || true) && \
-   (cp /app/build/src/bitcoin-util /app/binaries/ || true) && \
-   (cp /app/build/src/bitcoin-wallet /app/binaries/ || true) && \
-   ls -la /app/binaries/
-
 # Runtime stage
 FROM ubuntu:22.04
 
@@ -113,8 +101,12 @@ RUN groupadd -r vertocoin && useradd -r -g vertocoin vertocoin
 RUN mkdir -p /home/vertocoin/.vertocoin && \
    chown vertocoin:vertocoin /home/vertocoin/.vertocoin
 
-# Copy binaries from builder stage (copy only if they exist)
-COPY --from=builder /app/binaries/ /usr/local/bin/
+# Copy binaries from builder stage
+COPY --from=builder /app/build/bin/bitcoind /usr/local/bin/
+COPY --from=builder /app/build/bin/bitcoin-cli /usr/local/bin/
+COPY --from=builder /app/build/bin/bitcoin-tx /usr/local/bin/
+COPY --from=builder /app/build/bin/bitcoin-util /usr/local/bin/
+COPY --from=builder /app/build/bin/bitcoin-wallet /usr/local/bin/
 
 # Copy configuration file
 COPY vertocoin.conf /home/vertocoin/.vertocoin/vertocoin.conf
