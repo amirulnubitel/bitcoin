@@ -2785,7 +2785,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Ang error na ito ay maaaring lumabas kung ang wallet na ito ay hindi na i-shutdown na mabuti at last loaded gamit ang  build na may mas pinabagong bersyon ng Berkeley DB. Kung magkagayon, pakiusap ay gamitin ang software na ginamit na huli ng wallet na ito.</translation>
     </message>
     <message>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
+        <source>Live Release</source>
         <translation type="unfinished">Ito ay isang pre-release test build - gamitin sa iyong sariling peligro - huwag gumamit para sa mga aplikasyon ng pagmimina o pangangalakal</translation>
     </message>
     <message>

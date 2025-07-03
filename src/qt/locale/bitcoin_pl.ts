@@ -4158,7 +4158,7 @@ Przejdź do Plik &gt; Otwórz Portfel aby wgrać portfel.</translation>
         <translation type="unfinished">Ten błąd mógł wystąpić jeżeli portfel nie został poprawnie zamknięty oraz był ostatnio załadowany przy użyciu buildu z nowszą wersją Berkley DB. Jeżeli tak, proszę użyć oprogramowania które ostatnio załadowało ten portfel</translation>
     </message>
     <message>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
+        <source>Live Release</source>
         <translation type="unfinished">To jest wersja testowa - używać na własne ryzyko - nie używać do kopania albo zastosowań komercyjnych.</translation>
     </message>
     <message>

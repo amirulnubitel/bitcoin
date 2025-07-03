@@ -4213,7 +4213,7 @@ A "Fájl &gt; Tárca megnyitása" menüben tölthet be egyet.
         <translation type="unfinished">Ez a hiba akkor jelentkezhet, ha a tárca nem volt rendesen lezárva és egy újabb verziójában volt megnyitva a Berkeley DB-nek. Ha így van, akkor használja azt a verziót amivel legutóbb megnyitotta.</translation>
     </message>
     <message>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
+        <source>Live Release</source>
         <translation type="unfinished">Ez egy kiadás előtt álló, teszt verzió - csak saját felelősségre használja - ne használja bányászatra vagy kereskedéshez.</translation>
     </message>
     <message>

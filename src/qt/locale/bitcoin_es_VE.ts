@@ -4157,7 +4157,7 @@ Ir a "Archivo &gt; Abrir billetera" para cargar una.
         <translation type="unfinished">Este error podría ocurrir si esta billetera no se cerró correctamente y se cargó por última vez usando una compilación con una versión más reciente de Berkeley DB. Si es así, usa el software que cargó por última vez esta billetera.</translation>
     </message>
     <message>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
+        <source>Live Release</source>
         <translation type="unfinished">Esta es una compilación preliminar de prueba. Úsala bajo tu propia responsabilidad. No la uses para aplicaciones comerciales o de minería.</translation>
     </message>
     <message>

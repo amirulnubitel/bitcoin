@@ -4228,7 +4228,7 @@ Téigh go Comhad &gt; Oscail Sparán chun sparán a lódáil.
         <translation type="unfinished">D’fhéadfadh an earráid seo tarlú mura múchadh an sparán seo go glan agus go ndéanfaí é a lódáil go deireanach ag úsáid tiomsú le leagan níos nuaí de Berkeley DB. Más ea, bain úsáid as na bogearraí a rinne an sparán seo a lódáil go deireanach.</translation>
     </message>
     <message>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
+        <source>Live Release</source>
         <translation type="unfinished">Tógáil tástála réamheisiúint é seo - úsáid ar do riosca fhéin - ná húsáid le haghaidh iarratas mianadóireachta nó ceannaí</translation>
     </message>
     <message>

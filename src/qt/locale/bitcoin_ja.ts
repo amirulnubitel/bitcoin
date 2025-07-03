@@ -4242,7 +4242,7 @@ Go to File &gt; Open Wallet to load a wallet.
         <translation type="unfinished">このエラーはこのウォレットが正常にシャットダウンされず、前回ウォレットが読み込まれたときに新しいバージョンのBerkeley DBを使ったソフトウェアを利用していた場合に起こる可能性があります。もしそうであれば、このウォレットを前回読み込んだソフトウェアを使ってください</translation>
     </message>
     <message>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
+        <source>Live Release</source>
         <translation type="unfinished">これはリリース前のテストビルドです - 自己責任で使用してください - 採掘や商取引に使用しないでください</translation>
     </message>
     <message>

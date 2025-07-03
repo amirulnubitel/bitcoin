@@ -3640,7 +3640,7 @@ Taşıma işlemi, taşıma işleminden önce cüzdanın bir yedeğini oluşturac
         <translation type="unfinished">Bu hata, bu cüzdan düzgün bir şekilde kapatılmadıysa ve en son Berkeley DB'nin daha yeni bir sürümü kullanılarak yüklendiyse oluşabilir. Öyleyse, lütfen bu cüzdanı en son sürümünü kullanın.</translation>
     </message>
     <message>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
+        <source>Live Release</source>
         <translation type="unfinished">Bu kararlı sürümden önceki bir deneme sürümüdür. - risklerini bilerek kullanma sorumluluğu sizdedir - bitcoin oluşturmak ya da ticari uygulamalar için kullanmayınız</translation>
     </message>
     <message>

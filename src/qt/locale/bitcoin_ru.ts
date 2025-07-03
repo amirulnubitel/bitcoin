@@ -2279,7 +2279,7 @@ Go to File &gt; Open Wallet to load a wallet.
         <translation type="unfinished">Это могло произойти, если кошелёк был некорректно закрыт, а затем загружен сборкой с более новой версией Berkley DB. Если это так, воспользуйтесь сборкой, в которой этот кошелёк открывался в последний раз</translation>
     </message>
     <message>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
+        <source>Live Release</source>
         <translation type="unfinished">Это тестовая сборка. Используйте её на свой страх и риск. Не используйте её для добычи или в торговых приложениях</translation>
     </message>
     <message>

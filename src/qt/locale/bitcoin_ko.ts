@@ -4010,7 +4010,7 @@ Go to File &gt; Open Wallet to load a wallet.
         <translation type="unfinished">지갑이 완전히 종료되지 않고 최신 버전의 Berkeley DB 빌드를 사용하여 마지막으로 로드된 경우 오류가 발생할 수 있습니다. 이 지갑을 마지막으로 로드한 소프트웨어를 사용하십시오.</translation>
     </message>
     <message>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
+        <source>Live Release</source>
         <translation type="unfinished">출시 전의 테스트 빌드 입니다. - 스스로의 책임하에 사용하십시오. - 채굴이나 상업적 용도로 사용하지 마십시오.</translation>
     </message>
     <message>

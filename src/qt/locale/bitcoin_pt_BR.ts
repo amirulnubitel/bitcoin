@@ -3887,7 +3887,7 @@ Go to File &gt; Open Wallet to load a wallet.
         <translation type="unfinished">Este erro pode ocorrer se a sua carteira não foi desligada de forma correta e foi recentementa carregada utilizando uma nova versão do Berkeley DB. Se isto ocorreu então por favor utilize a mesma versão na qual esta carteira foi utilizada pela última vez.</translation>
     </message>
     <message>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
+        <source>Live Release</source>
         <translation type="unfinished">Este é um build de teste pré-lançamento - use por sua conta e risco - não use para mineração ou comércio</translation>
     </message>
     <message>

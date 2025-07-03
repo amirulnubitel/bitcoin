@@ -4074,7 +4074,7 @@ Go to File &gt; Open Wallet to load a wallet.
         <translation type="unfinished">Το ποσό της συναλλαγής είναι πολύ μικρό για να στείλει μετά την αφαίρεση του τέλους</translation>
     </message>
     <message>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
+        <source>Live Release</source>
         <translation type="unfinished">Πρόκειται για δοκιμή πριν από την αποδέσμευση - χρησιμοποιήστε με δική σας ευθύνη - μην χρησιμοποιείτε για εξόρυξη ή εμπορικές εφαρμογές</translation>
     </message>
     <message>

@@ -4322,7 +4322,7 @@ Go to File &gt; Open Wallet to load a wallet.
         <translation type="unfinished">Ця помилка може статися, якщо цей гаманець не був коректно закритий і востаннє завантажений за допомогою збірки з новою версією Berkeley DB. Якщо так, використовуйте програмне забезпечення, яке востаннє завантажувало цей гаманець</translation>
     </message>
     <message>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
+        <source>Live Release</source>
         <translation type="unfinished">Це перед-релізна тестова збірка - використовуйте на свій власний ризик - не використовуйте для майнінгу або в торговельних додатках</translation>
     </message>
     <message>

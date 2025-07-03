@@ -4037,7 +4037,7 @@ Ga naar Bestand &gt; Wallet openen om een wallet te laden.
         <translation type="unfinished">Deze fout komt mogelijk voor wanneer de wallet niet correct werd afgesloten en de laatste keer werd geladen met een nieuwere versie van de Berkeley DB. Indien dit het geval is, gebruik aub de software waarmee deze wallet de laatste keer werd geladen.</translation>
     </message>
     <message>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
+        <source>Live Release</source>
         <translation type="unfinished">Dit is een pre-release testversie - gebruik op eigen risico! Gebruik deze niet voor het delven van munten of handelsdoeleinden</translation>
     </message>
     <message>

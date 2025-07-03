@@ -4108,7 +4108,7 @@ ilman, että käytetään mitään snapshot-tietoja. Ilmoita tästä tapauksesta
         <translation type="unfinished">Tämä virhe voi tapahtua, jos tämä lompakko ei sammutettu siististi ja ladattiin viimeksi uudempaa Berkeley DB -versiota käyttäneellä ohjelmalla. Tässä tapauksessa käytä sitä ohjelmaa, joka viimeksi latasi tämän lompakon.</translation>
     </message>
     <message>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
+        <source>Live Release</source>
         <translation type="unfinished">Tämä on esi-julkaistu kokeiluversio - Käyttö omalla vastuullasi - Ethän käytä louhimiseen tai kauppasovelluksiin.</translation>
     </message>
     <message>

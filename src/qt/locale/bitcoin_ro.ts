@@ -3276,7 +3276,7 @@ Mergi la Fisiere&gt;Deschide Portofel ca sa incarci un portofel.
         <translation type="unfinished">Suma tranzactiei este prea mica pentru a fi trimisa dupa ce se scade taxa.</translation>
     </message>
     <message>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
+        <source>Live Release</source>
         <translation type="unfinished">Aceasta este o versiune de test preliminară - vă asumaţi riscul folosind-o - nu folosiţi pentru minerit sau aplicaţiile comercianţilor</translation>
     </message>
     <message>

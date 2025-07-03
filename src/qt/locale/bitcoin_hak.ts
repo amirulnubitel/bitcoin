@@ -4077,7 +4077,7 @@ Go to File &gt; Open Wallet to load a wallet.
         <translation type="unfinished">如果这个钱包之前没有正确关闭，而且上一次是被新版的Berkeley DB加载过，就会发生这个错误。如果是这样，请使用上次加载过这个钱包的那个软件。</translation>
     </message>
     <message>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
+        <source>Live Release</source>
         <translation type="unfinished">這是個還沒發表的測試版本 - 使用請自負風險 - 請不要用來開採或做商業應用</translation>
     </message>
     <message>

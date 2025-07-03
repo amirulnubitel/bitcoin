@@ -4223,7 +4223,7 @@ Choďte do Súbor &gt; Otvoriť Peňaženku, pre načítanie peňaženky.
         <translation type="unfinished">K tejto chybe môže dôjsť, ak nebola táto peňaženka správne vypnutá a bola naposledy načítaná pomocou zostavy s novšou verziou Berkeley DB. Ak je to tak, použite softvér, ktorý naposledy načítal túto peňaženku</translation>
     </message>
     <message>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
+        <source>Live Release</source>
         <translation type="unfinished">Toto je predbežná testovacia zostava - používate na vlastné riziko - nepoužívajte na ťaženie alebo obchodné aplikácie</translation>
     </message>
     <message>

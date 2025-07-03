@@ -3940,7 +3940,7 @@ Ves a Arxiu &gt; Obrir Cartera per a carregar cartera.
         <translation type="unfinished">Aquest error es podria produir si la cartera no es va tancar netament i es va carregar per última vegada mitjançant una més nova de Berkeley DB. Si és així, utilitzeu el programari que va carregar aquesta cartera per última vegada</translation>
     </message>
     <message>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
+        <source>Live Release</source>
         <translation type="unfinished">Aquesta és una versió de pre-llançament - utilitza-la sota la teva responsabilitat - No usar per a minería o aplicacions de compra-venda</translation>
     </message>
     <message>

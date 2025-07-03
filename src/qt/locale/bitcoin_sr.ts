@@ -3781,7 +3781,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
         <translation type="unfinished">Износ трансакције је толико мали за слање након што се одузме провизија</translation>
     </message>
     <message>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
+        <source>Live Release</source>
         <translation type="unfinished">Ово је тестна верзија пред издавање - користите на ваш ризик - не користити за рударење или трговачку примену</translation>
     </message>
     <message>

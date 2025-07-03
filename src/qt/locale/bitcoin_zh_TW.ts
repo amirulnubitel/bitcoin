@@ -4161,7 +4161,7 @@ Go to File &gt; Open Wallet to load a wallet.
         <translation type="unfinished">如果未完全關閉該錢包，並且最後一次使用具有較新版本的Berkeley DB的構建載入了此錢包，則可能會發生此錯誤。如果是這樣，請使用最後載入該錢包的軟體</translation>
     </message>
     <message>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
+        <source>Live Release</source>
         <translation type="unfinished">這是個還沒發表的測試版本 - 使用請自負風險 - 請不要用來開採或做商業應用</translation>
     </message>
     <message>

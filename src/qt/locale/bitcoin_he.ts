@@ -3422,7 +3422,7 @@ Go to File &gt; Open Wallet to load a wallet.
         <translation type="unfinished">שגיאה זו יכלה לקרות אם הארנק לא נסגר באופן נקי והועלה לאחרונה עם מבנה מבוסס גירסת Berkeley DB חדשה יותר. במקרה זה, יש להשתמש בתוכנה אשר טענה את הארנק בפעם האחרונה.</translation>
     </message>
     <message>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
+        <source>Live Release</source>
         <translation type="unfinished">זוהי בניית ניסיון טרום־פרסום – השימוש באחריותך – אין להשתמש בה לצורך כרייה או יישומי מסחר</translation>
     </message>
     <message>

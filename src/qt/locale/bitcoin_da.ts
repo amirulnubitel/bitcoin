@@ -3812,7 +3812,7 @@ Gå til Fil &gt; Åbn Pung for, at indlæse en pung.
         <translation type="unfinished">Denne fejl kunne finde sted hvis denne pung ikke blev lukket rent ned og sidst blev indlæst vha. en udgave med en nyere version af Berkeley DB. Brug i så fald venligst den programvare, som sidst indlæste denne pung</translation>
     </message>
     <message>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
+        <source>Live Release</source>
         <translation type="unfinished">Dette er en foreløbig testudgivelse – brug på eget ansvar – brug ikke til mining eller handelsprogrammer</translation>
     </message>
     <message>

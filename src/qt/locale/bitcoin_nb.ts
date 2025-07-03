@@ -3648,7 +3648,7 @@ Gå til Fil &gt; Åpne lommebok for å laste en lommebok.
         <translation type="unfinished">Denne feilen kan oppstå hvis denne lommeboken ikke ble avsluttet skikkelig og var sist lastet med en build som hadde en nyere versjon av Berkeley DB. Hvis det har skjedd, vær så snill å bruk softwaren som sist lastet denne lommeboken.</translation>
     </message>
     <message>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
+        <source>Live Release</source>
         <translation type="unfinished">Dette er en testversjon i påvente av utgivelse - bruk på egen risiko - ikke for bruk til blokkutvinning eller i forretningsøyemed</translation>
     </message>
     <message>

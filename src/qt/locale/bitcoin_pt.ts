@@ -4220,7 +4220,7 @@ Vá ao menu Ficheiro &gt; Abrir carteira para carregar uma carteira
         <translation type="unfinished">Este erro pode ocorrer se a carteira não foi desligada corretamente e foi carregada da última vez usando uma compilação com uma versão mais recente da Berkeley DB. Se sim, por favor use o programa que carregou esta carteira da última vez.</translation>
     </message>
     <message>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
+        <source>Live Release</source>
         <translation type="unfinished">Esta é uma versão de teste de pré-lançamento - use por sua conta e risco - não use para mineração ou aplicações comerciais</translation>
     </message>
     <message>
