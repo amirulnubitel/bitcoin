@@ -21,10 +21,13 @@ services:
     volumes:
       # Persistent blockchain data
       - vertocoin-data:/home/vertocoin/.vertocoin
-      # Optional: Custom configuration
-      # - ./vertocoin.conf:/home/vertocoin/.vertocoin/bitcoin.conf:ro
+      # Tor-enabled configuration
+      # - ./vertocoin-tor.conf:/home/vertocoin/.vertocoin/bitcoin.conf:ro
     networks:
       - vertocoin-network
+    depends_on:
+      - tor-proxy
+      - tor
     healthcheck:
       test:
         [
@@ -37,6 +40,36 @@ services:
       timeout: 10s
       retries: 3
       start_period: 60s
+
+  # Tor proxy for enhanced privacy
+  tor:
+    image: goldy/tor-hidden-service:latest
+    container_name: vertocoin-tor
+    restart: always
+    environment:
+      # VertoCoin node hidden service
+      - SERVICE1_TOR_SERVICE_HOSTS=80:vertocoin-core:9333
+      - SERVICE1_TOR_SERVICE_VERSION=3
+      # Optional: Set a custom private key (leave empty for auto-generation)
+      # - SERVICE1_TOR_SERVICE_KEY=<your_private_key>
+    volumes:
+      - tor-data:/var/lib/tor
+    networks:
+      - vertocoin-network
+    depends_on:
+      - vertocoin-core
+
+  # Tor SOCKS proxy for outbound connections
+  tor-proxy:
+    image: peterdavehello/tor-socks-proxy:latest
+    container_name: vertocoin-tor-proxy
+    restart: always
+    ports:
+      - "127.0.0.1:9050:9050" # SOCKS proxy port (bind to localhost only)
+    networks:
+      - vertocoin-network
+    environment:
+      - TOR_OPTS=--SocksPort 0.0.0.0:9050
 
   explorer:
     image: amirulmus/vertomax-explore:latest
@@ -137,6 +170,9 @@ services:
 volumes:
   # Persistent data volumes
   vertocoin-data:
+    driver: local
+
+  tor-data:
     driver: local
 
   # prometheus-data:
