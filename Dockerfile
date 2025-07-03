@@ -98,9 +98,9 @@ RUN apt-get update && apt-get install -y \
 RUN groupadd -r vertocoin && useradd -r -g vertocoin -m -d /home/vertocoin vertocoin
 
 # Create data directory with proper permissions
-RUN mkdir -p /home/vertocoin/.vertocoin/wallets && \
-   chown -R vertocoin:vertocoin /home/vertocoin && \
-   chmod -R 755 /home/vertocoin/.vertocoin
+# RUN mkdir -p /home/vertocoin/.vertocoin/wallets && \
+#    chown -R vertocoin:vertocoin /home/vertocoin && \
+#    chmod -R 755 /home/vertocoin/.vertocoin
 
 # Copy binaries from builder stage
 COPY --from=builder /app/build/bin/bitcoind /usr/local/bin/vertocoind
@@ -110,7 +110,7 @@ COPY --from=builder /app/build/bin/bitcoin-util /usr/local/bin/vertocoin-util
 COPY --from=builder /app/build/bin/bitcoin-wallet /usr/local/bin/vertocoin-wallet
 
 # Copy configuration file and set proper ownership
-COPY --chown=vertocoin:vertocoin vertocoin.conf /home/vertocoin/.vertocoin/vertocoin.conf
+# COPY --chown=vertocoin:vertocoin vertocoin.conf /home/vertocoin/.vertocoin/vertocoin.conf
 
 # Copy and setup entrypoint script
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
