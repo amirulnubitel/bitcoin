@@ -21,12 +21,13 @@ services:
     volumes:
       # Persistent blockchain data
       - vertocoin-data:/home/vertocoin/.vertocoin
-      # Tor-enabled configuration
-      # - ./vertocoin-tor.conf:/home/vertocoin/.vertocoin/bitcoin.conf:ro
+      # Tor-enabled configuration (simplified)
+      # - ./vertocoin-tor-simple.conf:/home/vertocoin/.vertocoin/bitcoin.conf:ro
     networks:
       - vertocoin-network
     depends_on:
-      - tor-proxy
+      tor-proxy:
+        condition: service_healthy
     healthcheck:
       test:
         [
@@ -62,11 +63,17 @@ services:
     container_name: vertocoin-tor-proxy
     restart: always
     ports:
-      - "127.0.0.1:9050:9050" # SOCKS proxy port (bind to localhost only)
+      - "9050:9050" # SOCKS proxy port (bind to localhost only)
     networks:
       - vertocoin-network
     environment:
       - TOR_OPTS=--SocksPort 0.0.0.0:9050
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "9050"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
 
   explorer:
     image: amirulmus/vertomax-explore:latest
@@ -77,7 +84,7 @@ services:
     environment:
       - BTCEXP_HOST=0.0.0.0
       - BTCEXP_PORT=3002
-      - BTCEXP_BITCOIND_HOST=vertocoin-node
+      - BTCEXP_BITCOIND_HOST=vertocoin-core
       - BTCEXP_BITCOIND_PORT=9332
       - BTCEXP_BITCOIND_USER=vertomax
       - BTCEXP_BITCOIND_PASS=Vertomax2025
