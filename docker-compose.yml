@@ -27,7 +27,6 @@ services:
       - vertocoin-network
     depends_on:
       - tor-proxy
-      - tor
     healthcheck:
       test:
         [
@@ -56,8 +55,6 @@ services:
       - tor-data:/var/lib/tor
     networks:
       - vertocoin-network
-    depends_on:
-      - vertocoin-core
 
   # Tor SOCKS proxy for outbound connections
   tor-proxy:
