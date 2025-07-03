@@ -115,10 +115,6 @@ volumes:
   # Persistent data volumes
   vertocoin-data:
     driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ./data/mainnet
 
   # prometheus-data:
   #   driver: local
