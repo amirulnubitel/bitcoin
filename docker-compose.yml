@@ -22,7 +22,7 @@ services:
       # Persistent blockchain data
       - vertocoin-data:/home/vertocoin/.vertocoin
       # Optional: Custom configuration
-      # - vertocoin.conf:/home/vertocoin/.vertocoin/vertocoin.conf:ro
+      # - ./vertocoin.conf:/home/vertocoin/.vertocoin/bitcoin.conf:ro
     networks:
       - vertocoin-network
     healthcheck:
@@ -30,7 +30,7 @@ services:
         [
           "CMD",
           "vertocoin-cli",
-          "-conf=/home/vertocoin/.vertocoin/vertocoin.conf",
+          "-conf=/home/vertocoin/.vertocoin/bitcoin.conf",
           "getblockchaininfo",
         ]
       interval: 30s
