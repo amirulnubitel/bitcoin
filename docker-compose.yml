@@ -21,13 +21,10 @@ services:
     volumes:
       # Persistent blockchain data
       - vertocoin-data:/home/vertocoin/.vertocoin
-      # Tor-enabled configuration (simplified)
-      # - ./vertocoin-tor-simple.conf:/home/vertocoin/.vertocoin/bitcoin.conf:ro
+      # Basic configuration
+      # - ./vertocoin.conf:/home/vertocoin/.vertocoin/bitcoin.conf:ro
     networks:
       - vertocoin-network
-    depends_on:
-      tor-proxy:
-        condition: service_healthy
     healthcheck:
       test:
         [
@@ -63,7 +60,7 @@ services:
     container_name: vertocoin-tor-proxy
     restart: always
     ports:
-      - "9050:9050" # SOCKS proxy port (bind to localhost only)
+      - "127.0.0.1:9050:9050" # SOCKS proxy port (bind to localhost only)
     networks:
       - vertocoin-network
     environment:
