@@ -102,11 +102,11 @@ RUN mkdir -p /home/vertocoin/.vertocoin && \
    chown vertocoin:vertocoin /home/vertocoin/.vertocoin
 
 # Copy binaries from builder stage
-COPY --from=builder /app/build/src/bitcoind /usr/local/bin/
-COPY --from=builder /app/build/src/bitcoin-cli /usr/local/bin/
-COPY --from=builder /app/build/src/bitcoin-tx /usr/local/bin/
-COPY --from=builder /app/build/src/bitcoin-util /usr/local/bin/
-COPY --from=builder /app/build/src/bitcoin-wallet /usr/local/bin/
+COPY --from=builder /app/build/bin/bitcoind /usr/local/bin/
+COPY --from=builder /app/build/bin/bitcoin-cli /usr/local/bin/
+COPY --from=builder /app/build/bin/bitcoin-tx /usr/local/bin/
+COPY --from=builder /app/build/bin/bitcoin-util /usr/local/bin/
+COPY --from=builder /app/build/bin/bitcoin-wallet /usr/local/bin/
 
 # Copy configuration file
 COPY vertocoin.conf /home/vertocoin/.vertocoin/vertocoin.conf
