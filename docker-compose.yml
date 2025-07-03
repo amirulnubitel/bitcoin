@@ -51,7 +51,9 @@ services:
       - BTCEXP_BITCOIND_PORT=9332
       - BTCEXP_BITCOIND_USER=vertomax
       - BTCEXP_BITCOIND_PASS=Vertomax2025
-      - BTCEXP_COIN=VTO
+      - BTCEXP_DISPLAY_CURRENCY=vto
+      - BTCEXP_LOCAL_CURRENCY=USD
+      # - BTCEXP_COIN=VTO
       # - BTCEXP_ADDRESS_API=electrumx
       # - BTCEXP_ELECTRUMX_SERVERS=tcp://electrumx:50001
     networks:
