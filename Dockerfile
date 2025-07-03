@@ -133,4 +133,4 @@ WORKDIR /home/vertocoin
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 
 # Default command
-CMD ["vertocoind"]
+CMD ["vertocoind -conf=/home/vertocoin/.vertocoin/bitcoin.conf"]

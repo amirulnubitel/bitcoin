@@ -40,7 +40,7 @@ safe_chown /home/vertocoin/.vertocoin vertocoin:vertocoin 755
 safe_chown_recursive /home/vertocoin/.vertocoin/wallets vertocoin:vertocoin 644
 
 # Try to change ownership of config file only if it's writable
-safe_chown /home/vertocoin/.vertocoin/vertocoin.conf vertocoin:vertocoin 644
+safe_chown /home/vertocoin/.vertocoin/bitcoin.conf vertocoin:vertocoin 644
 
 # Handle any other files in the data directory (except config file)
 find /home/vertocoin/.vertocoin -type f -writable -not -name "vertocoin.conf" -exec chown vertocoin:vertocoin {} + 2>/dev/null || true
@@ -53,7 +53,7 @@ fi
 
 # Default to running vertocoind if no command specified
 if [ "$#" -eq 0 ]; then
-    exec vertocoind -datadir=/home/vertocoin/.vertocoin -conf=/home/vertocoin/.vertocoin/vertocoin.conf
+    exec vertocoind -datadir=/home/vertocoin/.vertocoin -conf=/home/vertocoin/.vertocoin/bitcoin.conf
 else
     # If custom command is provided, ensure datadir is set for vertocoin commands
     case "$1" in
