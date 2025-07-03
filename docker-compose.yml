@@ -29,7 +29,7 @@ services:
       test:
         [
           "CMD",
-          "bitcoin-cli",
+          "vertocoin-cli",
           "-conf=/home/vertocoin/.vertocoin/vertocoin.conf",
           "getblockchaininfo",
         ]

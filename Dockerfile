@@ -103,11 +103,11 @@ RUN mkdir -p /home/vertocoin/.vertocoin/wallets && \
    chmod -R 755 /home/vertocoin/.vertocoin
 
 # Copy binaries from builder stage
-COPY --from=builder /app/build/bin/bitcoind /usr/local/bin/
-COPY --from=builder /app/build/bin/bitcoin-cli /usr/local/bin/
-COPY --from=builder /app/build/bin/bitcoin-tx /usr/local/bin/
-COPY --from=builder /app/build/bin/bitcoin-util /usr/local/bin/
-COPY --from=builder /app/build/bin/bitcoin-wallet /usr/local/bin/
+COPY --from=builder /app/build/bin/bitcoind /usr/local/bin/vertocoind
+COPY --from=builder /app/build/bin/bitcoin-cli /usr/local/bin/vertocoin-cli
+COPY --from=builder /app/build/bin/bitcoin-tx /usr/local/bin/vertocoin-tx
+COPY --from=builder /app/build/bin/bitcoin-util /usr/local/bin/vertocoin-util
+COPY --from=builder /app/build/bin/bitcoin-wallet /usr/local/bin/vertocoin-wallet
 
 # Copy configuration file
 COPY vertocoin.conf /home/vertocoin/.vertocoin/vertocoin.conf
@@ -126,9 +126,9 @@ RUN echo '#!/bin/bash\n\
    exec gosu vertocoin "$0" "$@"\n\
    fi\n\
    \n\
-   # Default to running bitcoind if no command specified\n\
+   # Default to running vertocoind if no command specified\n\
    if [ "$#" -eq 0 ]; then\n\
-   exec bitcoind -conf=/home/vertocoin/.vertocoin/vertocoin.conf -datadir=/home/vertocoin/.vertocoin\n\
+   exec vertocoind -conf=/home/vertocoin/.vertocoin/vertocoin.conf -datadir=/home/vertocoin/.vertocoin\n\
    else\n\
    exec "$@"\n\
    fi' > /usr/local/bin/docker-entrypoint.sh && \
@@ -151,4 +151,4 @@ WORKDIR /home/vertocoin
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 
 # Default command
-CMD ["bitcoind"]
+CMD ["vertocoind"]

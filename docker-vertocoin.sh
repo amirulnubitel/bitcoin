@@ -111,10 +111,10 @@ cli() {
     shift
     if [ $# -eq 0 ]; then
         # Interactive shell
-        docker compose exec vertocoin-core bitcoin-cli -conf=/home/vertocoin/.vertocoin/vertocoin.conf
+        docker compose exec vertocoin-core vertocoin-cli -conf=/home/vertocoin/.vertocoin/vertocoin.conf
     else
         # Execute command
-        docker compose exec vertocoin-core bitcoin-cli -conf=/home/vertocoin/.vertocoin/vertocoin.conf "$@"
+        docker compose exec vertocoin-core vertocoin-cli -conf=/home/vertocoin/.vertocoin/vertocoin.conf "$@"
     fi
 }
 
@@ -122,10 +122,10 @@ cli() {
 #     shift
 #     if [ $# -eq 0 ]; then
 #         # Interactive shell
-#         docker compose exec vertocoin-regtest bitcoin-cli -regtest -conf=/home/vertocoin/.vertocoin/vertocoin.conf
+#         docker compose exec vertocoin-regtest vertocoin-cli -regtest -conf=/home/vertocoin/.vertocoin/vertocoin.conf
 #     else
 #         # Execute command
-#         docker compose exec vertocoin-regtest bitcoin-cli -regtest -conf=/home/vertocoin/.vertocoin/vertocoin.conf "$@"
+#         docker compose exec vertocoin-regtest vertocoin-cli -regtest -conf=/home/vertocoin/.vertocoin/vertocoin.conf "$@"
 #     fi
 # }
 
@@ -135,7 +135,7 @@ status() {
     docker compose ps
     echo ""
     log "Health Status:"
-    docker compose exec vertocoin-core bitcoin-cli -conf=/home/vertocoin/.vertocoin/vertocoin.conf getblockchaininfo 2>/dev/null || warn "Mainnet node not responding"
+    docker compose exec vertocoin-core vertocoin-cli -conf=/home/vertocoin/.vertocoin/vertocoin.conf getblockchaininfo 2>/dev/null || warn "Mainnet node not responding"
 }
 
 # Clean up
