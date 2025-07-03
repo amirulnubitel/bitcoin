@@ -56,10 +56,12 @@ RUN cd depends && make -j$(nproc) NO_QT=1
 RUN cmake -B build \
    -DCMAKE_TOOLCHAIN_FILE=/app/depends/x86_64-pc-linux-gnu/toolchain.cmake \
    -DCMAKE_BUILD_TYPE=Release \
+   -DCMAKE_CXX_FLAGS="-Wno-error" \
+   -DCMAKE_C_FLAGS="-Wno-error" \
    -DBUILD_TX=ON \
    -DBUILD_UTIL=ON \
    -DWITH_ZMQ=ON \
-   -WITH_USDT=OFF \
+   -DWITH_USDT=OFF \
    -DWITH_WALLET=ON \
    -DBUILD_WALLET_TOOL=ON \
    -DWITH_CCACHE=ON \
