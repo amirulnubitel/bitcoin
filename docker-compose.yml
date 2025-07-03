@@ -14,10 +14,10 @@ services:
       - "9332:9332" # RPC port
       - "9333:9333" # P2P port
       # ZMQ notification ports
-      - "28332:28332" # Raw block notifications
-      - "28333:28333" # Raw transaction notifications
-      - "28334:28334" # Block hash notifications
-      - "28335:28335" # Transaction hash notifications
+      # - "28332:28332" # Raw block notifications
+      # - "28333:28333" # Raw transaction notifications
+      # - "28334:28334" # Block hash notifications
+      # - "28335:28335" # Transaction hash notifications
     volumes:
       # Persistent blockchain data
       - vertocoin-data:/home/vertocoin/.vertocoin

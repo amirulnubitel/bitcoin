@@ -95,11 +95,12 @@ RUN apt-get update && apt-get install -y \
    && rm -rf /var/lib/apt/lists/*
 
 # Create vertocoin user
-RUN groupadd -r vertocoin && useradd -r -g vertocoin vertocoin
+RUN groupadd -r vertocoin && useradd -r -g vertocoin -m -d /home/vertocoin vertocoin
 
-# Create data directory
-RUN mkdir -p /home/vertocoin/.vertocoin && \
-   chown vertocoin:vertocoin /home/vertocoin/.vertocoin
+# Create data directory with proper permissions
+RUN mkdir -p /home/vertocoin/.vertocoin/wallets && \
+   chown -R vertocoin:vertocoin /home/vertocoin && \
+   chmod -R 755 /home/vertocoin/.vertocoin
 
 # Copy binaries from builder stage
 COPY --from=builder /app/build/bin/bitcoind /usr/local/bin/
@@ -115,6 +116,10 @@ RUN chown vertocoin:vertocoin /home/vertocoin/.vertocoin/vertocoin.conf
 # Create entrypoint script
 RUN echo '#!/bin/bash\n\
    set -e\n\
+   \n\
+   # Ensure data directory exists and has correct permissions\n\
+   mkdir -p /home/vertocoin/.vertocoin/wallets\n\
+   chown -R vertocoin:vertocoin /home/vertocoin/.vertocoin\n\
    \n\
    # If running as root, drop privileges to vertocoin user\n\
    if [ "$(id -u)" = "0" ]; then\n\
