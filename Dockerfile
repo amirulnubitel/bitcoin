@@ -109,30 +109,12 @@ COPY --from=builder /app/build/bin/bitcoin-tx /usr/local/bin/vertocoin-tx
 COPY --from=builder /app/build/bin/bitcoin-util /usr/local/bin/vertocoin-util
 COPY --from=builder /app/build/bin/bitcoin-wallet /usr/local/bin/vertocoin-wallet
 
-# Copy configuration file (but don't change ownership since it might be mounted read-only)
-COPY vertocoin.conf /home/vertocoin/.vertocoin/vertocoin.conf
+# Copy configuration file and set proper ownership
+COPY --chown=vertocoin:vertocoin vertocoin.conf /home/vertocoin/.vertocoin/vertocoin.conf
 
-# Create entrypoint script
-RUN echo '#!/bin/bash\n\
-   set -e\n\
-   \n\
-   # Ensure data directory exists and has correct permissions\n\
-   mkdir -p /home/vertocoin/.vertocoin/wallets\n\
-   chown -R vertocoin:vertocoin /home/vertocoin/.vertocoin\n\
-   chmod -R 755 /home/vertocoin/.vertocoin\n\
-   \n\
-   # If running as root, drop privileges to vertocoin user\n\
-   if [ "$(id -u)" = "0" ]; then\n\
-   exec gosu vertocoin "$0" "$@"\n\
-   fi\n\
-   \n\
-   # Default to running vertocoind if no command specified\n\
-   if [ "$#" -eq 0 ]; then\n\
-   exec vertocoind -conf=/home/vertocoin/.vertocoin/vertocoin.conf -datadir=/home/vertocoin/.vertocoin\n\
-   else\n\
-   exec "$@"\n\
-   fi' > /usr/local/bin/docker-entrypoint.sh && \
-   chmod +x /usr/local/bin/docker-entrypoint.sh
+# Copy and setup entrypoint script
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 # Expose ports
 # Main network port: 9333
