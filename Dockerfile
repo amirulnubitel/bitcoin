@@ -124,7 +124,7 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 EXPOSE 9332 9333 19443 19444 28332 28333 28334 28335
 
 # Set data directory volume
-# VOLUME ["/home/vertocoin/.vertocoin"]
+VOLUME ["/home/vertocoin/.vertocoin"]
 
 # Set working directory
 WORKDIR /home/vertocoin
@@ -133,4 +133,4 @@ WORKDIR /home/vertocoin
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 
 # Default command
-CMD ["vertocoind -datadir=/home/vertocoin/.vertocoin -conf=/home/vertocoin/.vertocoin/vertocoin.conf"]
+CMD ["vertocoind -conf=/home/vertocoin/.vertocoin/vertocoin.conf"]
