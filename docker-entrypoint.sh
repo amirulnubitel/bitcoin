@@ -53,7 +53,20 @@ fi
 
 # Default to running vertocoind if no command specified
 if [ "$#" -eq 0 ]; then
-    exec vertocoind -conf=/home/vertocoin/.vertocoin/vertocoin.conf -datadir=/home/vertocoin/.vertocoin
+    exec vertocoind -datadir=/home/vertocoin/.vertocoin -conf=/home/vertocoin/.vertocoin/vertocoin.conf
 else
-    exec "$@"
+    # If custom command is provided, ensure datadir is set for vertocoin commands
+    case "$1" in
+        vertocoind|vertocoin-cli|vertocoin-tx|vertocoin-util|vertocoin-wallet)
+            # Check if datadir is already specified
+            if [[ ! "$*" =~ -datadir ]]; then
+                exec "$@" -datadir=/home/vertocoin/.vertocoin
+            else
+                exec "$@"
+            fi
+            ;;
+        *)
+            exec "$@"
+            ;;
+    esac
 fi

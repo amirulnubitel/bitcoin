@@ -110,7 +110,7 @@ COPY --from=builder /app/build/bin/bitcoin-util /usr/local/bin/vertocoin-util
 COPY --from=builder /app/build/bin/bitcoin-wallet /usr/local/bin/vertocoin-wallet
 
 # Copy configuration file and set proper ownership
-# COPY --chown=vertocoin:vertocoin vertocoin.conf /home/vertocoin/.vertocoin/vertocoin.conf
+COPY --chown=vertocoin:vertocoin vertocoin.conf /home/vertocoin/.vertocoin/vertocoin.conf
 
 # Copy and setup entrypoint script
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
